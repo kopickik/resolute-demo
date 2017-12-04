@@ -35,7 +35,17 @@ class GameResult extends Component {
     }
   }
 
-  playerChange(prop, player) {
-    this.setState({[prop]: player})
+  handleNameChange(prop, player) {
+    this.setState({ [prop]: player.target.value });
   }
+  handleScoreChange(prop, e) {
+    this.setState({ [prop]: Number(e.target.value) });
+  }
+
+  render () {
+    <div className="game-result">
+      
+    </div>
+  }
+
 }
