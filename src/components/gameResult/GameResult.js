@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash';
 import Select from '../controls/SelectField'
-import SingleInput from '../controls/SingleInput'
+import NumberInput from '../controls/NumberInput'
 
 import { updatePlayer } from '../../lib/players'
 import { playersUrl } from '../../lib/firebase'
@@ -73,6 +73,7 @@ class GameResult extends Component {
       player1Score: 0,
       player2Score: 0
     });
+    this.gameResultForm.reset();
   }
 
   canBeSubmitted() {
@@ -84,7 +85,7 @@ class GameResult extends Component {
   render () {
     const { players } = this.props;
     return (
-      <form className="form new-game-result" onSubmit={this.sendResults.bind(this)}>
+      <form ref={(e) => {this.gameResultForm = e}} className="form new-game-result" onSubmit={this.sendResults.bind(this)}>
         <h3>New Game Result</h3>
         <div className="form-row">
           <div className="col-sm form-group">
@@ -97,7 +98,7 @@ class GameResult extends Component {
               onChange={this.handleNameChange.bind(this, "player1Name")}
             />
             <label className="form-label">Score</label>
-            <SingleInput
+            <NumberInput
               inputType={"number"}
               min={0}
               max={10}
@@ -117,7 +118,7 @@ class GameResult extends Component {
               placeholder="Player2.."
             />
             <label className="form-label">Score</label>
-            <SingleInput
+            <NumberInput
               inputType={"number"}
               name={"player2Score"}
               min={0}

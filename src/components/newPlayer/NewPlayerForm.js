@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { fire } from "../../lib/firebase";
-import SingleInput from "../controls/SingleInput";
+import TextInput from "../controls/TextInput";
 import Select from "../controls/SelectField";
 
 class NewPlayerForm extends Component {
@@ -57,10 +57,10 @@ class NewPlayerForm extends Component {
         <div className="row">
           <div className="col-sm">
             <label className="form-label">Player Name</label>
-            <SingleInput
+            <TextInput
               inputType={"text"}
               name={"playerName"}
-              controlFunc={this.handleNameChange}
+              onChange={this.handleNameChange.bind(this, "playerName")}
               content={this.state.playerName}
               placeholder={"The new guy.."}
             />
