@@ -21,7 +21,7 @@ let validationMessages = {
   equalNames: 'Foosball games must have differing opponents.',
   equalScores: 'Foosball games cannot end in a tie.',
   empty: 'You must provide a value.',
-  default: 'There was a problem submitting the form.'
+  default: 'Please fill out the entire form.'
 }
 
 class GameResult extends Component {
@@ -73,7 +73,6 @@ class GameResult extends Component {
       player1Score: 0,
       player2Score: 0
     });
-    this.gameResultForm.reset();
   }
 
   canBeSubmitted() {
@@ -85,7 +84,7 @@ class GameResult extends Component {
   render () {
     const { players } = this.props;
     return (
-      <form ref={(e) => {this.gameResultForm = e}} className="form new-game-result" onSubmit={this.sendResults.bind(this)}>
+      <form className="form new-game-result" onSubmit={this.sendResults.bind(this)}>
         <h3>New Game Result</h3>
         <div className="form-row">
           <div className="col-sm form-group">

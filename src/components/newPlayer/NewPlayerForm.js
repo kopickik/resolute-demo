@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import { fire } from "../../lib/firebase";
 import TextInput from "../controls/TextInput";
-import Select from "../controls/SelectField";
 
 class NewPlayerForm extends Component {
   constructor(props) {
@@ -45,7 +43,6 @@ class NewPlayerForm extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    const { playerName } = this.state;
     this.submitNewPlayer(this.state);
     this.handleClearForm(e);
   }
@@ -56,23 +53,24 @@ class NewPlayerForm extends Component {
         <h3 className="upcase">New Player</h3>
         <div className="row">
           <div className="col-sm">
-            <label className="form-label">Player Name</label>
-            <TextInput
-              inputType={"text"}
-              name={"playerName"}
-              onChange={this.handleNameChange.bind(this, "playerName")}
-              content={this.state.playerName}
-              placeholder={"The new guy.."}
-            />
+            <div className="input-group">
+              <TextInput
+                inputType={"text"}
+                name={"playerName"}
+                onChange={this.handleNameChange.bind(this, "playerName")}
+                content={this.state.playerName}
+                placeholder={"New player's name"}
+              />
+            </div>
           </div>
           <div className="col-sm">
             <input
               type="submit"
-              className="btn btn-default float-right"
+              className="btn btn-default"
               value="Add"
             />
             <button
-              className="btn btn-link float-left"
+              className="btn btn-link"
               onClick={this.handleClearForm}
             >
               Clear form

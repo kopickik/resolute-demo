@@ -8,14 +8,18 @@
     "react-scripts": "1.0.17"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start-js": "react-scripts start",
+    "build-js": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm-run-all build-css build-js",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
   },
   "devDependencies": {
-    "isomorphic-fetch": "^2.2.1",
-    "node-fetch": "^1.7.3",
+    "node-sass-chokidar": "0.0.3",
+    "npm-run-all": "^4.1.2",
     "react-table": "^6.7.4",
     "react-widgets": "^4.1.1"
   }

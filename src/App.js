@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-import logo from './logo.svg'
 import './App.css'
 import 'react-widgets/dist/css/react-widgets.css'
 import Rankings from './components/rankings/Rankings'
@@ -29,15 +28,28 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Foosball Tracker</h1>
         </header>
         <div className="container">
+          <h2>Player Rankings</h2>
           <Rankings players={players} />
           <hr/>
           <GameResult players={players} />
           <hr/>
           <NewPlayerForm />
+        </div>
+        <div className="footer">
+          <small>
+            This demo was created using
+            &nbsp;<a 
+              href="https://github.com/facebookincubator/create-react-app"
+              target="_blank"
+              rel="noopener noreferrer">create-react-app</a>
+            &nbsp;and <a 
+            href="https://firebase.google.com"
+            target="_blank"
+            rel="noopener noreferrer">firebase</a>.
+          </small>
         </div>
       </div>
     );

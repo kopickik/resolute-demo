@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TextInput = props => (
-  <div className="form-group">
     <input
-      className="form-input"
+      className="form-control"
       name={props.name}
       type={props.inputType}
       value={props.content}
@@ -12,7 +11,6 @@ const TextInput = props => (
       onBlur={props.onBlur}
       placeholder={props.placeholder}
     />
-  </div>
 );
 
 TextInput.propTypes = {
