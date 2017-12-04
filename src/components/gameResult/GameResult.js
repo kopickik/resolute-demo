@@ -4,6 +4,7 @@ import Select from '../controls/SelectField'
 import SingleInput from '../controls/SingleInput'
 
 import { updatePlayer } from '../../lib/players'
+import { playersUrl } from '../../lib/firebase'
 
 function validate(state) {
   return {
@@ -31,23 +32,30 @@ class GameResult extends Component {
     player2Score: null
   }
 
+  componentDidMount () {
+    const playerData = fetch(playersUrl);
+    playerData
+      .then(data => data.json())
+      .then(players => {
+        this.setState({ playersCollection: players })
+      })
+  }
+
   sendResults (e) {
-    const { player1Name, player1Score, player2Name, player2Score } = this.state
-    console.log(this.state);
+    const { player1Name, player1Score, player2Name, player2Score, playersCollection } = this.state
+
     if (!this.canBeSubmitted()) {
       alert(validationMessages.default)
       e.preventDefault(); return;
     }
     e.preventDefault();
     if (player1Score < player2Score) {
-      updatePlayer(player1Name, player1Score, false).then(() => {
-        return updatePlayer(player2Name, player2Score, true)
-      })
+      updatePlayer(playersCollection, player1Name, player1Score, false)
+      updatePlayer(playersCollection, player2Name, player2Score, true)
     }
     if (player2Score < player1Score) {
-      updatePlayer(player2Name, player2Score, false).then(() => {
-        return updatePlayer(player1Name, player1Score, true)
-      })
+      updatePlayer(playersCollection, player2Name, player2Score, false)
+      updatePlayer(playersCollection, player1Name, player1Score, true)
     }
   }
 
