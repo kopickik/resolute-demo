@@ -41,6 +41,25 @@ class GameResult extends Component {
   handleScoreChange(prop, e) {
     this.setState({ [prop]: Number(e.target.value) })
   }
+  handleClearForm(e) {
+    e.preventDefault();
+    this.setState({
+      player1Name: "",
+      player2Name: "",
+      player1Score: 0,
+      player2Score: 0
+    });
+  }
+
+  validate () {
+
+  }
+
+  canBeSubmitted() {
+    const errors = validate(this.state);
+    const isDisabled = _.keys(errors).some(x => errors[x]);
+    return !isDisabled;
+  }
 
   render () {
     const { players } = this.props;
