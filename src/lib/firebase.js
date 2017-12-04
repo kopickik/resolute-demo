@@ -10,3 +10,6 @@ const config = {
 }
 
 export const fire = firebase.initializeApp(config);
+export const playersUrl = `${process.env.REACT_APP_FIREBASE_DB_URL}/players.json?print=pretty`
+export const playerUrl = (playerId) => 
+  `${process.env.REACT_APP_FIREBASE_DB_URL}/players/${playerId}?${process.env.REACT_APP_FIREBASE_API_KEY}`

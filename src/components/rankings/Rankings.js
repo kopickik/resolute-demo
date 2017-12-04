@@ -28,7 +28,7 @@ class Rankings extends Component {
             desc: true
           }
         ]}
-        data={this.state.players}
+        data={players}
         columns={columns}
         defaultPageSize={5}
       />

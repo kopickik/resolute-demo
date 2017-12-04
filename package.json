@@ -14,6 +14,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "node-fetch": "^1.7.3",
     "react-table": "^6.7.4",
     "react-widgets": "^4.1.1"

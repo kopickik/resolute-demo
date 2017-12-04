@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Select from '../controls/SelectField'
 import SingleInput from '../controls/SingleInput'
 
-import { updatePlayer } from '../../api/'
+import { updatePlayer } from '../../lib/players'
 
 class GameResult extends Component {
   state = {
@@ -15,7 +15,7 @@ class GameResult extends Component {
   sendResults (e) {
     e.preventDefault()
     const { player1Name, player1Score, player2Name, player2Score } = this.state
-    if (player1Name && player2Name && !!player1Score && !!player2Score)
+    if (player1Name && player2Name && !!player1Score && !!player2Score) {
 
     if (player1Name === player2Name) {
         alert('Foosball matches must have differing opponents.')
@@ -30,7 +30,7 @@ class GameResult extends Component {
           })
         }
       }
-    else {
+    } else {
       alert('Please fill out the form completely.')
     }
   }
@@ -43,17 +43,17 @@ class GameResult extends Component {
   }
 
   render () {
+    const { players } = this.props;
     return (
-      <form className="form new-game-result" onSubmit={this.handleFormSubmit}>
+      <form className="form new-game-result" onSubmit={this.sendResults.bind(this)}>
         <h3>New Game Result</h3>
         <div className="form-row">
           <div className="col-sm form-group">
             <label className="form-label">Player 1</label>
             <Select
               name="Player1"
-              onBlur={this.handleBlur("player1Name")}
               placeholder={"Player1.."}
-              options={players}
+              data={players}
               controlFunc={this.handleNameChange.bind(this, "player1Name")}
             />
             <label className="form-label">Score</label>
@@ -63,7 +63,6 @@ class GameResult extends Component {
               max={10}
               name={"player1Score"}
               controlFunc={this.handleScoreChange.bind(this, "player1Score")}
-              onBlur={this.handleBlur("player1Score")}
               content={this.state.player1Score}
               placeholder={"0"}
             />
@@ -72,9 +71,8 @@ class GameResult extends Component {
             <label className="form-label">Player 2</label>
             <Select
               name="Player2"
-              options={players}
+              data={players}
               controlFunc={this.handleNameChange.bind(this, "player2Name")}
-              onBlur={this.handleBlur("player2Name")}
               placeholder="Player2.."
             />
             <label className="form-label">Score</label>
@@ -85,7 +83,6 @@ class GameResult extends Component {
               max={10}
               controlFunc={this.handleScoreChange.bind(this, "player2Score")}
               content={this.state.player2Score}
-              onBlur={this.handleBlur("player2Score")}
               placeholder={"0"}
             />
           </div>
