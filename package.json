@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "firebase": "^4.7.0",
+    "lodash": "^4.17.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.0.17"
@@ -18,6 +20,7 @@
     "watch-css": "npm run build && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
   },
   "devDependencies": {
+    "bootstrap": "^4.0.0-beta.2",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.2",
     "react-table": "^6.7.4",
