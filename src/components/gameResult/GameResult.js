@@ -1,8 +1,20 @@
 import React, { Component } from 'react'
+import _ from 'lodash';
 import Select from '../controls/SelectField'
 import SingleInput from '../controls/SingleInput'
 
 import { updatePlayer } from '../../lib/players'
+
+function validate(state) {
+  return {
+    player1Name:
+      state.player1Name.length === 0 || state.player1Name === state.player2Name,
+    player1Score: Number(state.player1Score) < 0,
+    player2Name:
+      state.player2Name.length === 0 || state.player2Name === state.player1Name,
+    player2Score: Number(state.player2Score) < 0
+  };
+}
 
 class GameResult extends Component {
   state = {
@@ -49,10 +61,6 @@ class GameResult extends Component {
       player1Score: 0,
       player2Score: 0
     });
-  }
-
-  validate () {
-
   }
 
   canBeSubmitted() {

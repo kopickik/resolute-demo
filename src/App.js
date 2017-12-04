@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import fetch from 'isomorphic-fetch'
 import logo from './logo.svg'
 import './App.css'
@@ -17,7 +18,7 @@ class App extends Component {
     fetch(playersUrl)
       .catch((err) => alert('A problem was encountered while trying to fetch foosball players.'))
       .then((response) => response.json())
-      .then((data) => this.setState({ players: data }))
+      .then((data) => this.setState({ players: _(data).toArray }))
       // .then((players) => this.setState({ players }))
   }
 
