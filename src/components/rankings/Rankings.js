@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 
-class RankingTable extends Component {
+class Rankings extends Component {
   render () {
     const { players } = this.props
 
@@ -35,3 +35,5 @@ class RankingTable extends Component {
     )
   }
 }
+
+export default Rankings
