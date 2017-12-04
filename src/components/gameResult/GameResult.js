@@ -16,6 +16,13 @@ function validate(state) {
   };
 }
 
+let validationMessages = {
+  equalNames: 'Foosball games must have differing opponents.',
+  equalScores: 'Foosball games cannot end in a tie.',
+  empty: 'You must provide a value.',
+  default: 'There was a problem submitting the form.'
+}
+
 class GameResult extends Component {
   state = {
     player1Name: null,
@@ -25,30 +32,27 @@ class GameResult extends Component {
   }
 
   sendResults (e) {
-    e.preventDefault()
     const { player1Name, player1Score, player2Name, player2Score } = this.state
-    if (player1Name && player2Name && !!player1Score && !!player2Score) {
-
-    if (player1Name === player2Name) {
-        alert('Foosball matches must have differing opponents.')
-      }
-
-      if (player1Score === player2Score) {
-        alert('Foosball matches must not end in a tie.')
-      } else {
-        if (player1Score < player2Score) {
-          updatePlayer(player1Name, player1Score).then(() => {
-            return updatePlayer(player2Name, player2Score, true)
-          })
-        }
-      }
-    } else {
-      alert('Please fill out the form completely.')
+    console.log(this.state);
+    if (!this.canBeSubmitted()) {
+      alert(validationMessages.default)
+      e.preventDefault(); return;
+    }
+    e.preventDefault();
+    if (player1Score < player2Score) {
+      updatePlayer(player1Name, player1Score, false).then(() => {
+        return updatePlayer(player2Name, player2Score, true)
+      })
+    }
+    if (player2Score < player1Score) {
+      updatePlayer(player2Name, player2Score, false).then(() => {
+        return updatePlayer(player1Name, player1Score, true)
+      })
     }
   }
 
   handleNameChange(prop, player) {
-    this.setState({ [prop]: player.target.value })
+    this.setState({ [prop]: player.name })
   }
   handleScoreChange(prop, e) {
     this.setState({ [prop]: Number(e.target.value) })
@@ -82,7 +86,7 @@ class GameResult extends Component {
               placeholder={"Player1.."}
               data={players}
               textField="name"
-              controlFunc={this.handleNameChange.bind(this, "player1Name")}
+              onChange={this.handleNameChange.bind(this, "player1Name")}
             />
             <label className="form-label">Score</label>
             <SingleInput
@@ -90,7 +94,7 @@ class GameResult extends Component {
               min={0}
               max={10}
               name={"player1Score"}
-              controlFunc={this.handleScoreChange.bind(this, "player1Score")}
+              onChange={this.handleScoreChange.bind(this, "player1Score")}
               content={this.state.player1Score}
               placeholder={"0"}
             />
@@ -101,7 +105,7 @@ class GameResult extends Component {
               name="Player2"
               data={players}
               textField="name"
-              controlFunc={this.handleNameChange.bind(this, "player2Name")}
+              onChange={this.handleNameChange.bind(this, "player2Name")}
               placeholder="Player2.."
             />
             <label className="form-label">Score</label>
@@ -110,7 +114,7 @@ class GameResult extends Component {
               name={"player2Score"}
               min={0}
               max={10}
-              controlFunc={this.handleScoreChange.bind(this, "player2Score")}
+              onChange={this.handleScoreChange.bind(this, "player2Score")}
               content={this.state.player2Score}
               placeholder={"0"}
             />
@@ -120,8 +124,7 @@ class GameResult extends Component {
           <div className="col-sm">&nbsp;</div>
           <div className="col-sm">
             <input type="submit" className="btn btn-default" value="Submit" />
-            <button className="btn btn-link" onClick={this.handleClearForm}>
-              {" "}
+            <button className="btn btn-link" onClick={this.handleClearForm.bind(this)}>
               Clear form
             </button>
           </div>
