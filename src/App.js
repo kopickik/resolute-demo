@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-import fetch from 'isomorphic-fetch'
 import logo from './logo.svg'
 import './App.css'
 import 'react-widgets/dist/css/react-widgets.css'
@@ -15,11 +14,13 @@ class App extends Component {
   }
 
   componentDidMount () {
-    fetch(playersUrl)
-      .catch((err) => alert('A problem was encountered while trying to fetch foosball players.'))
-      .then((response) => response.json())
-      .then((data) => this.setState({ players: _(data).toArray }))
-      // .then((players) => this.setState({ players }))
+    const playerData = fetch(playersUrl);
+    playerData
+      .then(data => data.json())
+      .then(players => {
+        let playersNames = _.map(players, (player) => player)
+        this.setState({ players: playersNames })
+      })
   }
 
   render() {

@@ -81,6 +81,7 @@ class GameResult extends Component {
               name="Player1"
               placeholder={"Player1.."}
               data={players}
+              textField="name"
               controlFunc={this.handleNameChange.bind(this, "player1Name")}
             />
             <label className="form-label">Score</label>
@@ -99,6 +100,7 @@ class GameResult extends Component {
             <Select
               name="Player2"
               data={players}
+              textField="name"
               controlFunc={this.handleNameChange.bind(this, "player2Name")}
               placeholder="Player2.."
             />
