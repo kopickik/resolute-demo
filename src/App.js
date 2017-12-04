@@ -5,7 +5,8 @@ import './App.css'
 import 'react-widgets/dist/css/react-widgets.css'
 import Rankings from './components/rankings/Rankings'
 import GameResult from './components/gameResult/GameResult'
-import { playersUrl } from './lib/firebase';
+import NewPlayerForm from './components/newPlayer/NewPlayerForm'
+import { playersUrl } from './lib/firebase'
 
 class App extends Component {
 
@@ -35,6 +36,8 @@ class App extends Component {
           <Rankings players={players} />
           <hr/>
           <GameResult players={players} />
+          <hr/>
+          <NewPlayerForm />
         </div>
       </div>
     );
