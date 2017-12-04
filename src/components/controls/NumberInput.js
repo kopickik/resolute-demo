@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SingleInput extends Component {
+class NumberInput extends Component {
     render() {
         const { label, onChange } = this.props;
 
@@ -13,4 +13,4 @@ class SingleInput extends Component {
     }
 }
 
-export default SingleInput;
+export default NumberInput;
